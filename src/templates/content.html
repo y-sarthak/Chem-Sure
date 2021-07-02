@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="#424242 #FBDFB2 z-depth-4" style="height:70px;">
+  
+  <span class="center-align" style="margin-top: 30px;">
+<style type="text/css">
+  h2
+  {
+    display:inline;
+    margin-left: 430px;
+    font-weight: bold;
+    color: #BDB2FF;
+    font-family: 'Yellowtail', cursive;
+  }
+</style>
+    <h2 class="#BDB2FF center-align">Be Chem-Sure!</h2></span>
+</div>
+
+
+<div class="parallax-container">
+      <div class="parallax">
+<img src="/static/basic.png">
+      </div>
+    </div>
+
+
+
+ 
+<div class="container">
+  
+
+<style type="text/css">
+  
+  h3
+  {
+    font-family:  'Rajdhani', sans-serif;
+  }
+
+  
+</style>
+     
+     <h3 class="center-align #fdd835-text yellow-text text-darken-1" style="font-weight: bold">Chemical Analysis</h3><br>
+       
+
+
+<table class="striped centered">
+        <thead>
+          <tr style="font-family: 'Varela Round', sans-serif">
+              <th>Name</th>
+              <th>Category</th>
+              <th>Function</th>
+              <th>Concern</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+{% for instance in object %}
+
+          <tr>
+
+            {% for test in instance %}
+
+
+            {% if test == 'Safe' %}
+
+                <td style="font-family: 'Exo 2', sans-serif"><span class="green-text">{{ test }}</span></td>
+
+            {%endif%}
+
+            {% if test == 'Moderate' %}
+
+                <td style="font-family: 'Exo 2', sans-serif"><span class="yellow-text">{{ test }}</span></td>
+
+            {%endif%}
+
+            {% if test == 'Toxic' %}
+
+                <td style="font-family: 'Exo 2', sans-serif"><span class="red-text">{{ test }}</span></td>
+
+            {%endif%}
+
+              {% if test != 'Toxic' and test != 'Moderate' and test != 'Safe' %}
+
+                <td style="font-family: 'Exo 2', sans-serif"><span class="black-text">{{ test }}</span></td>
+
+              {%endif%}
+
+            {% endfor %}
+          </tr>
+
+{% endfor %}
+
+     </tbody>
+</table>
+
+
+
+
+      <br>
+        <br>
+
+
+
+<style type="text/css">
+  
+  .chart_box {
+  width: 900px;
+  margin: 0 auto;
+}
+
+  
+</style>
+
+
+<div class="chart_box">
+  <div id="piechart" ></div>
+</div>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Safe', {{safe}} ],
+  ['Moderate', {{mod}} ],
+  ['Toxic', {{toxic}} ]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'width':750, 'height':600,'legend': 'none',
+                'colors': ['#A1E887', '#FF8F1F', '#F15156']};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+
+</div>
+
+   
+
+
+
+
+
+    <div class="parallax-container">
+      <div class="parallax"><img src="/static/chemistry.jpg">
+        
+       
+      </div>
+    </div>
+
+<style type="text/css">
+        .lol
+        {
+          height: 80px;
+          margin-bottom: 0px;
+          
+        }
+      </style>
+
+    <div class="row #fbc02d yellow darken-2 lol z-depth-5">
+      <style type="text/css">
+        .seth
+        {
+          margin-top: 30px;
+          margin-bottom: 20px;
+          height: 20px;
+          width: 20px;
+        }
+      </style>
+      <div class="col s2 right-align"><a target="_blank" href="https://www.facebook.com/JCBIndiaLtd/"><img class="seth" src="/static/icons/iconfinder_BW_Facebook_2_glyph_svg_5305153.png"></a></div>
+      <div class="col s2 center-align"><a target="_blank" href="https://www.instagram.com/jcbindialtd/"><img class="seth" src="/static/icons/iconfinder_Instagram_glyph_svg_5335781.png"></a></div>
+      <div class="col s2 center-align"><a target="_blank" href="https://twitter.com/JCBIndiaLtd"><img class="seth" src="/static/icons/iconfinder_BW_Twitter_glyph_svg_5305170.png"></a></div>
+      <div class="col s2 center-align"><a target="_blank" href="https://www.linkedin.com/company/10865023?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A10865023%2Cidx%3A2-1-2%2CtarId%3A1468936449852%2Ctas%3Ajcb%20india%20"><img class="seth" src="/static/icons/iconfinder_BW_Linkedin_glyph_svg_5305157.png"></a></div>
+      <div class="col s2 center-align"><a target="_blank" href="https://www.youtube.com/user/jcbindialtd?feature=results_main"><img class="seth" src="/static/icons/iconfinder_BW_Youtube_glyph_svg_5305164.png"></a></div>
+      <div class="col s2 left-align"><a target="_blank" href="https://en.wikipedia.org/wiki/JCB_(company)"><img class="seth" src="/static/icons/iconfinder_BW_Dribbble_2_glyph_svg_5305152.png"></a></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.parallax');
+    var instances = M.Parallax.init(elems);
+  });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });
+
+
+
+var instance = M.Carousel.init({
+    fullWidth: true,
+    indicators: true
+  });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems,{
+      fullWidth: true,
+      indicators: true
+    });
+  });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems);
+  });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
+  });
+
+  </script>
+{% endblock %}
+
+
+
+
+
+<!-- <img src="/static/3dx-backhoe-loader.jpg">  -->
